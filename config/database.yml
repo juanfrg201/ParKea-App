@@ -83,4 +83,4 @@ production:
   <<: *default
   database: Parkea_App_production
   username: Parkea_App
-  password: <%= ENV["PARKEA_APP_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
