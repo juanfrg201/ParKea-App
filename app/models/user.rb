@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  belongs_to :role_user
+  belongs_to :role
 
   def is_root? 
     if self.role_user.name == "root" && self.role_user.present?
