@@ -1,7 +1,7 @@
-<body>
-	
+<% if user_signed_in? && current_user.is_client? %>
 
-	
+<% elsif user_signed_in? && (current_user.is_root? || current_user.is_admin) %>
+	<%= render partial: 'welcome_page/admin' %> 
+<% else %>
 
-	
-</body>
+<% end %>
