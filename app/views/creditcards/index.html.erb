@@ -1,0 +1,48 @@
+<section class="bg-gray-50 dark:bg-red-600">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+          Tarjetas Agregadas    
+      </a>
+			<div class="relative overflow-x-auto">
+				<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+					<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+						<tr>
+							<th scope="col" class="px-6 py-3">
+									Nombre
+							</th>
+							<th scope="col" class="px-6 py-3">
+									Compania
+							</th>
+							<th scope="col" class="px-6 py-3">
+									Numero
+							</th>
+							<th scope="col" class="px-6 py-3">
+									Acciones
+							</th>
+						</tr>
+					</thead>
+					<% if @creditcard %>
+						<tbody>
+								<%= @creditcard.each do |credit|%>
+									<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+											<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+													<%= credit.name_card %>
+											</th>
+											<td class="px-6 py-4">
+													<%= credit.company_credit_card.name %>
+											</td>
+											<td class="px-6 py-4">
+													<%= credit.number_card %>
+											</td>
+											<td class="px-6 py-4">
+												<%= link_to 'Eliminar', creditcard_path(credit), method: :delete, data: { confirm: '¿Estás seguro?' } %>
+											</td>
+									</tr>
+								<% end %>
+						</tbody>
+					<% end %>
+				</table>
+			</div>
+			<%= link_to 'Agregar metodo de pago' , new_creditcard_path, class:"bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"%>
+		</div>
+</section>
