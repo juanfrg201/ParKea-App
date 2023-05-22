@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  belongs_to :user_role
+  belongs_to :role_user
 
   def is_root? 
-    if self.user_role.name == "root" && self.user_role_id.present?
+    if self.role_user.name == "root" && self.role_user.present?
       true
     else
       false
@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    if self.user_role.name == "admin" && self.user_role_id.present?
+    if self.role_user.name == "admin" && self.role_user.present?
       true
     else
       false
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   end
 
   def is_client? 
-    if self.user_role_id == nil
+    if self.role_user_id == nil
       true
     else
       false
