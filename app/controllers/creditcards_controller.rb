@@ -13,7 +13,7 @@ class CreditcardsController < ApplicationController
 		validator = Creditcard.validate_credit_card(number_card: credit_card_params[:number_credit])
 		num = credit_card_params[:number_credit]
 		if validator.present?
-			credit_card = Creditcard.new(name_card: credit_card_params[:credit_card_params], number_card: num, exp_date: credit_card_params[:exp_date].to_date, user_id: current_user.id, company_credit_card_id: validator)
+			credit_card = Creditcard.new(name_card: credit_card_params[:name_card], number_card: num, exp_date: credit_card_params[:exp_date].to_date, user_id: current_user.id, company_credit_card_id: validator)
 			if credit_card.save
 				redirect_to root_path 
 			end
