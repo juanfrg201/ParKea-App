@@ -1,145 +1,144 @@
-<div class="flex">
-		<!-- Sidebar -->
-		<div class="bg-blue-900 text-white w-1/6">
-				<div class="p-4">
-						<h1 class="text-2xl font-bold">Admin Dashboard</h1>
-						<ul class="mt-4">
-								<li class="py-2 border-t border-gray-700">
-										<a href="#" class="block hover:text-gray-400">Inicio</a>
-								</li>
-								<li class="py-2 border-t border-gray-700">
-										<a href="#" class="block hover:text-gray-400">Usuarios</a>
-								</li>
-								<li class="py-2 border-t border-gray-700">
-										<a href="#" class="block hover:text-gray-400">Configuración</a>
-								</li>
-								<li class="py-2 border-t border-gray-700">
-										<a href="#" class="block hover:text-gray-400">Ayuda</a>
-								</li>
-						</ul>
-				</div>
+<div class="flex flex-col sm:flex-row">
+	<!-- Sidebar -->
+	<div class="bg-blue-900 text-white w-full sm:w-1/6">
+		<div class="p-4">
+			<h1 class="text-2xl font-bold">Admin Dashboard</h1>
+			<ul class="mt-4">
+				<li class="py-2 border-t border-gray-700">
+					<a href="#" class="block hover:text-gray-400">Inicio</a>
+				</li>
+				<li class="py-2 border-t border-gray-700">
+					<a href="#" class="block hover:text-gray-400">Usuarios</a>
+				</li>
+				<li class="py-2 border-t border-gray-700">
+					<a href="#" class="block hover:text-gray-400">Configuración</a>
+				</li>
+				<li class="py-2 border-t border-gray-700">
+					<a href="#" class="block hover:text-gray-400">Ayuda</a>
+				</li>
+			</ul>
 		</div>
-		<!-- Main Content -->
-		<div class="w-3/4 p-8" >
-				<h2 class="text-2xl font-bold mb-4">Bienvenido al Panel de Administración</h2>
-				<div class="bg-red-600 rounded-lg p-4">
-						<!-- Aquí puedes agregar el contenido de tu dashboard -->
-						<div class="p-4">
-						<div class="bg-white rounded-lg shadow-lg overflow-hidden">
-							<table class="min-w-full">
-								<thead class="bg-gray-200">
-									<tr>
-										<th class="py-2 px-4">Localidad</th>
-										<th class="py-2 px-4">Tipo</th>
-										<th class="py-2 px-4">Nombre</th>
-										<th class="py-2 px-4">Editar</th>
-										<th class="py-2 px-4">Eliminar</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="py-2 px-4">John Doe</td>
-										<td class="py-2 px-4">28</td>
-										<td class="py-2 px-4">john@example.com</td>
-									</tr>
-									<tr>
-										<td class="py-2 px-4">Jane Smith</td>
-										<td class="py-2 px-4">35</td>
-										<td class="py-2 px-4">jane@example.com</td>
-									</tr>
-									<!-- Agrega más filas de datos según sea necesario -->
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<br>
-					<br>
-					<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-						<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
-							<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 1">
-							<div>
-								<h2 class="text-xl font-semibold">Estadística 1</h2>
-								<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-						<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
-							<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 2">
-							<div>
-								<h2 class="text-xl font-semibold">Estadística 2</h2>
-								<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-						<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
-							<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 3">
-							<div>
-								<h2 class="text-xl font-semibold">Estadística 3</h2>
-								<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-					</div>
-					<br>
-					<br>
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-						<div class="bg-white rounded-lg shadow overflow-hidden">
-							<div class="bg-gray-200 px-4 py-3">
-								<h2 class="text-xl font-semibold">Tabla 1</h2>
-							</div>
-							<table class="min-w-full">
-								<thead class="bg-gray-100">
-									<tr>
-										<th class="py-2 px-4">Nombre</th>
-										<th class="py-2 px-4">Email</th>
-										<th class="py-2 px-4">Rol</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="py-2 px-4">John Doe</td>
-										<td class="py-2 px-4">john@example.com</td>
-										<td class="py-2 px-4">Administrador</td>
-									</tr>
-									<tr>
-										<td class="py-2 px-4">Jane Smith</td>
-										<td class="py-2 px-4">jane@example.com</td>
-										<td class="py-2 px-4">Usuario</td>
-									</tr>
-									<!-- Agrega más filas de datos según sea necesario -->
-								</tbody>
-							</table>
-						</div>
-
-						<div class="bg-white rounded-lg shadow overflow-hidden">
-							<div class="bg-gray-200 px-4 py-3">
-								<h2 class="text-xl font-semibold">Tabla 2</h2>
-							</div>
-							<table class="min-w-full">
-								<thead class="bg-gray-100">
-									<tr>
-										<th class="py-2 px-4">Producto</th>
-										<th class="py-2 px-4">Precio</th>
-										<th class="py-2 px-4">Existencias</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="py-2 px-4">Producto 1</td>
-										<td class="py-2 px-4">$19.99</td>
-										<td class="py-2 px-4">10</td>
-									</tr>
-									<tr>
-										<td class="py-2 px-4">Producto 2</td>
-										<td class="py-2 px-4">$24.99</td>
-										<td class="py-2 px-4">5</td>
-									</tr>
-									<!-- Agrega más filas de datos según sea necesario -->
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<br>
-					<br>
-					<br>
+	</div>
+	<!-- Main Content -->
+	<div class="w-full sm:w-3/4 p-8">
+		<h2 class="text-2xl font-bold mb-4">Bienvenido al Panel de Administración</h2>
+		<div class="bg-red-600 rounded-lg p-4">
+			<!-- Aquí puedes agregar el contenido de tu dashboard -->
+			<div class="p-4">
+				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+					<table class="min-w-full">
+						<thead class="bg-gray-200">
+							<tr>
+								<th class="py-2 px-4">Localidad</th>
+								<th class="py-2 px-4">Tipo</th>
+								<th class="py-2 px-4">Nombre</th>
+								<th class="py-2 px-4">Editar</th>
+								<th class="py-2 px-4">Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="py-2 px-4">John Doe</td>
+								<td class="py-2 px-4">28</td>
+								<td class="py-2 px-4">john@example.com</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4">Jane Smith</td>
+								<td class="py-2 px-4">35</td>
+								<td class="py-2 px-4">jane@example.com</td>
+							</tr>
+							<!-- Agrega más filas de datos según sea necesario -->
+						</tbody>
+					</table>
 				</div>
 			</div>
+			<br>
+			<br>
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 1">
+					<div>
+						<h2 class="text-xl font-semibold">Estadística 1</h2>
+						<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 2">
+					<div>
+						<h2 class="text-xl font-semibold">Estadística 2</h2>
+						<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 3">
+					<div>
+						<h2 class="text-xl font-semibold">Estadística 3</h2>
+						<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				<div class="bg-white rounded-lg shadow overflow-hidden">
+					<div class="bg-gray-200 px-4 py-3">
+						<h2 class="text-xl font-semibold">Tabla 1</h2>
+					</div>
+					<table class="min-w-full">
+						<thead class="bg-gray-100">
+							<tr>
+								<th class="py-2 px-4">Nombre</th>
+								<th class="py-2 px-4">Email</th>
+								<th class="py-2 px-4">Rol</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="py-2 px-4">John Doe</td>
+								<td class="py-2 px-4">john@example.com</td>
+								<td class="py-2 px-4">Administrador</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4">Jane Smith</td>
+								<td class="py-2 px-4">jane@example.com</td>
+								<td class="py-2 px-4">Usuario</td>
+							</tr>
+							<!-- Agrega más filas de datos según sea necesario -->
+						</tbody>
+					</table>
+				</div>
+
+				<div class="bg-white rounded-lg shadow overflow-hidden">
+					<div class="bg-gray-200 px-4 py-3">
+						<h2 class="text-xl font-semibold">Tabla 2</h2>
+					</div>
+					<table class="min-w-full">
+						<thead class="bg-gray-100">
+							<tr>
+								<th class="py-2 px-4">Producto</th>
+								<th class="py-2 px-4">Precio</th>
+								<th class="py-2 px-4">Existencias</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="py-2 px-4">Producto 1</td>
+								<td class="py-2 px-4">$19.99</td>
+								<td class="py-2 px-4">10</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4">Producto 2</td>
+								<td class="py-2 px-4">$24.99</td>
+								<td class="py-2 px-4">5</td>
+							</tr>
+							<!-- Agrega más filas de datos según sea necesario -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
 		</div>
+	</div>
 </div>

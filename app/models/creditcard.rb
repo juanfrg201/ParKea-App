@@ -21,4 +21,8 @@ class Creditcard < ApplicationRecord
 		
 	end
 
+	def credit_cart_active?
+		return is_active.present? ? is_active : false
+	end
+
 end

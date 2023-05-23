@@ -13,7 +13,7 @@ class CreditcardsController < ApplicationController
 		validator = Creditcard.validate_credit_card(number_card: credit_card_params[:number_credit])
 		num = credit_card_params[:number_credit]
 		if validator.present?
-			credit_card = Creditcard.new(alias: credit_card_params[:alias], number_card: num, exp_date: credit_card_params[:exp_date].to_date, user_id: current_user.id, company_credit_card_id: validator)
+			credit_card = Creditcard.new(alias: credit_card_params[:alias], number_card: num, exp_date: credit_card_params[:exp_date].to_date, user_id: current_user.id, company_credit_card_id: validator, is_active: true)
 			if credit_card.save
 				redirect_to root_path 
 			end
@@ -23,12 +23,10 @@ class CreditcardsController < ApplicationController
 	end
 
 	def destroy 
-		@creditcard = Creditcard.find(params[:id])
+		@creditcard = Creditcard.find(params[:id].to_i)
 		if @creditcard.destroy
-			puts "se elimino"
 			redirect_to root_path
 		else
-			puts "no se puedo"
 			redirect_to root_path
 		end
 
