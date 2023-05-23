@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  city_parking: one
+  parking_type: one
+  rates: 1
+  spaces_available: 1
+  availability: MyString
+  tota_spaces_availble: 1
+  address: MyString
+  fidelity: MyString
+
+two:
+  name: MyString
+  city_parking: two
+  parking_type: two
+  rates: 1
+  spaces_available: 1
+  availability: MyString
+  tota_spaces_availble: 1
+  address: MyString
+  fidelity: MyString

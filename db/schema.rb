@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_222250) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_225632) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "city_parkings", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "company_credit_cards", force: :cascade do |t|
     t.string "name"
@@ -32,6 +38,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_222250) do
     t.boolean "is_active"
     t.index ["company_credit_card_id"], name: "index_creditcards_on_company_credit_card_id"
     t.index ["user_id"], name: "index_creditcards_on_user_id"
+  end
+
+  create_table "parking_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "parkings", force: :cascade do |t|
+    t.string "name"
+    t.bigint "city_parking_id", null: false
+    t.bigint "parking_type_id", null: false
+    t.integer "rates"
+    t.integer "spaces_available"
+    t.boolean "availability"
+    t.integer "tota_spaces_availble"
+    t.string "address"
+    t.string "fidelity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_parking_id"], name: "index_parkings_on_city_parking_id"
+    t.index ["parking_type_id"], name: "index_parkings_on_parking_type_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -56,5 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_222250) do
 
   add_foreign_key "creditcards", "company_credit_cards"
   add_foreign_key "creditcards", "users"
+  add_foreign_key "parkings", "city_parkings"
+  add_foreign_key "parkings", "parking_types"
   add_foreign_key "users", "roles"
 end
