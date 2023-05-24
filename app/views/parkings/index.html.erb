@@ -1,0 +1,115 @@
+<main class="bg-blue-600">
+	<section id="servicios" class="container mx-auto py-12">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('DisponibleAdmin.png') %>" alt="Imagen 1">
+					<div>
+						<h2 class="text-xl font-semibold">Parqueaderos Disponibles</h2>
+						<h2 class="text-gray-600 text-3xl"> <%= @parkings.map{ |a| a.tota_spaces_availble }.sum %> </h2>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('ActivoAdmin.webp') %>" alt="Imagen 2">
+					<div>
+						<h2 class="text-xl font-semibold">Parqueadros Activos</h2>
+						<h2 class="text-gray-600 text-3xl"><%= @parkings.where(availability: true).count %></h2>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('InactivoAdmin.webp') %>" alt="Imagen 3">
+					<div>
+						<h2 class="text-xl font-semibold">Parqueaderos Inactivos</h2>
+						<h2 class="text-gray-600 text-3xl"><%= @parkings.where(availability: false).count %></h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+  <section id="servicios" class="container mx-auto py-12 h-100">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+          <div>
+            <h2 class="text-xl font-semibold">Registrar Parqueadero</h2>
+            <%= link_to "Registrar", root_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto" %>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+          <div>
+            <h2 class="text-xl font-semibold">Registrar tipo parqueadero</h2>
+            <%= link_to "Registrar", new_parking_type_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto" %>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-xl p-10 flex items-center h-100">
+          <div>
+            <h2 class="text-xl font-semibold">Registrar ciudades</h2>
+            <%= link_to "Registrar", root_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  <section id="servicios" class="container mx-auto py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+      <div class="bg-gray-200 px-4 py-3">
+        <h2 class="text-xl font-semibold">Ciudades</h2>
+      </div>
+      <table class="min-w-full">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-2 px-4">Nombre</th>
+            <th class="py-2 px-4">Editar</th>
+            <th class="py-2 px-4">Eliminar</th>
+            <th class="py-2 px-4">Desactivar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @parkings.where(availability: true).each do |parking| %>	
+            <tr>
+              <td class="py-2 px-4 text-center align-middle"><%= parking.name %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= parking.city_parking.name %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+            </tr>
+          <% end %>
+          <!-- Agrega más filas de datos según sea necesario -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+      <div class="bg-gray-200 px-4 py-3">
+        <h2 class="text-xl font-semibold">Tipos de parqueaderos</h2>
+      </div>
+      <table class="min-w-full">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-2 px-4">Nombre</th>
+            <th class="py-2 px-4">Esta activo</th>
+            <th class="py-2 px-4">Activar</th>
+            <th class="py-2 px-4">Desactivar</th>
+            <th class="py-2 px-4">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @parking_types.sort.each do |parking_type| %>	
+            <tr>
+              <td class="py-2 px-4 text-center align-middle"><%= parking_type.name %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= parking_type.is_active == true ? "Si" : "No" %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= button_to "Activar", enable_parking_types_path(parking_type.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= button_to "Desactivar", disable_parking_types_path(parking_type.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= button_to "Eliminar", parking_type_path(parking_type.id), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este tipo de estacionamiento?' }, class: "inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+            </tr>
+          <% end %>
+          <!-- Agrega más filas de datos según sea necesario -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </section>
+</main>
+
+

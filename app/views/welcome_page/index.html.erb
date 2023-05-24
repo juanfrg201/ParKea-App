@@ -1,7 +1,7 @@
 <% if user_signed_in? && current_user.is_client? %>
 
 <% elsif user_signed_in? && (current_user.is_root? || current_user.is_admin) %>
-	<%= render partial: 'welcome_page/admin' %> 
+	<%= render partial: 'welcome_page/admin', locals: { parkings: @parkings }%> 
 <% else %>
 	<%= render partial: 'welcome_page/index_all' %> 
 <% end %>

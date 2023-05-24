@@ -49,7 +49,7 @@
           <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-yellow-400 md:dark:bg-yellow-400 dark:border-gray-700">
               <li>
-                <%= link_to "Parkeaderos", new_user_session_path, class:"block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" %>
+                <%= link_to "Parkeaderos", parkings_path, class:"block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" %>
               </li>
               <li>
                 <%= link_to "Clientes", new_user_registration_path, class:"block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" %>
@@ -96,11 +96,31 @@
     </nav>
   <% end %>
 
-
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> text-white p-4 mb-4 rounded-md text-center md:w-1/2 mx-auto w-full">
+      <%= value %>
+    </div>
+  <% end %>
 
   <body>
     <main>
       <%= yield %>      
     </main>
   </body>
+
+  <footer class="bg-gray-800 py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="mb-4 md:mb-0">
+          <h2 class="text-white text-xl font-semibold">PAR-KEA</h2>
+          <p class="text-gray-400">Bogota</p>
+        </div>
+        <div class="flex items-center space-x-4">
+        </div>
+      </div>
+      <hr class="my-4 border-gray-700">
+      <p class="text-center text-gray-400">© 2023 PAR-KEA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
 </html>

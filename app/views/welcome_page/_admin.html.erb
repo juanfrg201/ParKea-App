@@ -56,24 +56,24 @@
 			<br>
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
-					<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 1">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('DisponibleAdmin.png') %>" alt="Imagen 1">
 					<div>
-						<h2 class="text-xl font-semibold">Estadística 1</h2>
-						<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<h2 class="text-xl font-semibold">Parqueaderos Disponibles</h2>
+						<h2 class="text-gray-600 text-3xl"> <%= @parkings.map{ |a| a.tota_spaces_availble }.sum %> </h2>
 					</div>
 				</div>
 				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
-					<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 2">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('ActivoAdmin.webp') %>" alt="Imagen 2">
 					<div>
-						<h2 class="text-xl font-semibold">Estadística 2</h2>
-						<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<h2 class="text-xl font-semibold">Parqueadros Activos</h2>
+						<h2 class="text-gray-600 text-3xl"><%= @parkings.where(availability: true).count %></h2>
 					</div>
 				</div>
 				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
-					<img class="h-16 w-16 rounded-full mr-4" src="ruta-de-la-imagen" alt="Imagen 3">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('InactivoAdmin.webp') %>" alt="Imagen 3">
 					<div>
-						<h2 class="text-xl font-semibold">Estadística 3</h2>
-						<p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<h2 class="text-xl font-semibold">Parqueaderos Inactivos</h2>
+						<h2 class="text-gray-600 text-3xl"><%= @parkings.where(availability: false).count %></h2>
 					</div>
 				</div>
 			</div>
@@ -82,27 +82,27 @@
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 				<div class="bg-white rounded-lg shadow overflow-hidden">
 					<div class="bg-gray-200 px-4 py-3">
-						<h2 class="text-xl font-semibold">Tabla 1</h2>
+						<h2 class="text-xl font-semibold">Parqueaderos Activos</h2>
 					</div>
 					<table class="min-w-full">
 						<thead class="bg-gray-100">
 							<tr>
 								<th class="py-2 px-4">Nombre</th>
-								<th class="py-2 px-4">Email</th>
-								<th class="py-2 px-4">Rol</th>
+								<th class="py-2 px-4">Ciudad</th>
+								<th class="py-2 px-4">Espacios Disponibles</th>
+								<th class="py-2 px-4">Tipo</th>
+								<th class="py-2 px-4">Desactivar</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="py-2 px-4">John Doe</td>
-								<td class="py-2 px-4">john@example.com</td>
-								<td class="py-2 px-4">Administrador</td>
-							</tr>
-							<tr>
-								<td class="py-2 px-4">Jane Smith</td>
-								<td class="py-2 px-4">jane@example.com</td>
-								<td class="py-2 px-4">Usuario</td>
-							</tr>
+							<% @parkings.where(availability: true).each do |parking| %>	
+								<tr>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.name %></td>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.city_parking.name %></td>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+								</tr>
+							<% end %>
 							<!-- Agrega más filas de datos según sea necesario -->
 						</tbody>
 					</table>
@@ -110,35 +110,32 @@
 
 				<div class="bg-white rounded-lg shadow overflow-hidden">
 					<div class="bg-gray-200 px-4 py-3">
-						<h2 class="text-xl font-semibold">Tabla 2</h2>
+						<h2 class="text-xl font-semibold">Parqueaderos Inactivos</h2>
 					</div>
 					<table class="min-w-full">
 						<thead class="bg-gray-100">
 							<tr>
-								<th class="py-2 px-4">Producto</th>
-								<th class="py-2 px-4">Precio</th>
-								<th class="py-2 px-4">Existencias</th>
+								<th class="py-2 px-4">Nombre</th>
+								<th class="py-2 px-4">Ciudad</th>
+								<th class="py-2 px-4">Espacios Disponibles</th>
+								<th class="py-2 px-4">Tipo</th>
+								<th class="py-2 px-4">Desactivar</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="py-2 px-4">Producto 1</td>
-								<td class="py-2 px-4">$19.99</td>
-								<td class="py-2 px-4">10</td>
-							</tr>
-							<tr>
-								<td class="py-2 px-4">Producto 2</td>
-								<td class="py-2 px-4">$24.99</td>
-								<td class="py-2 px-4">5</td>
-							</tr>
+							<% @parkings.where(availability: false).each do |parking| %>	
+								<tr>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.name %></td>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.city_parking.name %></td>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+									<td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+								</tr>
+							<% end %>
 							<!-- Agrega más filas de datos según sea necesario -->
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<br>
-			<br>
-			<br>
 		</div>
 	</div>
 </div>
