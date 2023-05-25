@@ -1,11 +1,13 @@
 class ParkingTypesController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
     @parking_type = ParkingType.new
   end
 
   def create
-    @parking = ParkingType.new(name: parking_type_params[:name])
+    @parking = ParkingType.new(name: params[:name])
     if @parking.save 
       flash[:success] = "Se registro el tipo de parqueadero"
       redirect_to parkings_path

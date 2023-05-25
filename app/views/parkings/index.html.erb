@@ -32,24 +32,62 @@
         <div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
           <div>
             <h2 class="text-xl font-semibold">Registrar Parqueadero</h2>
-            <%= link_to "Registrar", root_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto" %>
+            <%= link_to "Registrar", new_parking_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto form-input mt-1 py-3 px-4 block w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-50" %>
           </div>
         </div>
         <div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
           <div>
             <h2 class="text-xl font-semibold">Registrar tipo parqueadero</h2>
-            <%= link_to "Registrar", new_parking_type_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto" %>
+            <%= link_to "Registrar", new_parking_type_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto form-input mt-1 py-3 px-4 block w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-50" %>
           </div>
         </div>
         <div class="bg-white rounded-lg shadow-xl p-10 flex items-center h-100">
           <div>
             <h2 class="text-xl font-semibold">Registrar ciudades</h2>
-            <%= link_to "Registrar", root_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto" %>
+            <%= link_to "Registrar", new_city_parking_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto form-input mt-1 py-3 px-4 block w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-50" %>
           </div>
         </div>
       </div>
     </div>
     
+  </section>
+  <section id="servicios" class="container mx-auto py-12">
+    <div class="bg-red-600 rounded-lg p-4">
+      <!-- Aquí puedes agregar el contenido de tu dashboard -->
+      <div class="p-4">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <table class="min-w-full">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="py-2 px-4 align-middle ">Localidad</th>
+                <th class="py-2 px-4 align-middle">Tipo</th>
+                <th class="py-2 px-4 align-middle">Ciudad</th>
+                <th class="py-2 px-4 align-middle">Nombre</th>
+                <th class="py-2 px-4 align-middle">Esta Activo</th>
+                <th class="py-2 px-4 align-middle">Activar</th>
+                <th class="py-2 px-4 align-middle">Desactivar</th>
+                <th class="py-2 px-4 align-middle">Editar</th>
+                <th class="py-2 px-4 align-middle">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @parkings.sort.each do |parking| %>	
+                <tr>
+                  <td class="py-2 px-4 text-center align-middle"><%= parking.address %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= parking.city_parking.name %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= parking.name %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= parking.availability == true ? "Si" : "No" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Activar", enable_parkings_path(id: parking.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Desactivar", disable_parkings_path(id: parking.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Editar", parking_path(parking.id), method: :delete, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Eliminar", parking_path(parking.id), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este tipo de estacionamiento?' }, class: "inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
   </section>
   <section id="servicios" class="container mx-auto py-12">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -61,18 +99,20 @@
         <thead class="bg-gray-100">
           <tr>
             <th class="py-2 px-4">Nombre</th>
-            <th class="py-2 px-4">Editar</th>
-            <th class="py-2 px-4">Eliminar</th>
+            <th class="py-2 px-4">Esta activo</th>
+            <th class="py-2 px-4">Activar</th>
             <th class="py-2 px-4">Desactivar</th>
+            <th class="py-2 px-4">Eliminar</th>
           </tr>
         </thead>
         <tbody>
-          <% @parkings.where(availability: true).each do |parking| %>	
+          <% @city.sort.each do |city| %>	
             <tr>
-              <td class="py-2 px-4 text-center align-middle"><%= parking.name %></td>
-              <td class="py-2 px-4 text-center align-middle"><%= parking.city_parking.name %></td>
-              <td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
-              <td class="py-2 px-4 text-center align-middle"><%= parking.parking_type.name %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= city.name %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= city.is_active == true ? "Si" : "No" %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= button_to "Activar", enable_city_parking_index_path(city.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= button_to "Desactivar", disable_city_parking_index_path(city.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+              <td class="py-2 px-4 text-center align-middle"><%= button_to "Eliminar", city_parking_path(city.id), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este tipo de estacionamiento?' }, class: "inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
             </tr>
           <% end %>
           <!-- Agrega más filas de datos según sea necesario -->

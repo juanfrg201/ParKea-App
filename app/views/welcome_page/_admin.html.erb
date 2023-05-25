@@ -1,24 +1,6 @@
 <div class="flex flex-col sm:flex-row">
 	<!-- Sidebar -->
-	<div class="bg-blue-900 text-white w-full sm:w-1/6">
-		<div class="p-4">
-			<h1 class="text-2xl font-bold">Admin Dashboard</h1>
-			<ul class="mt-4">
-				<li class="py-2 border-t border-gray-700">
-					<a href="#" class="block hover:text-gray-400">Inicio</a>
-				</li>
-				<li class="py-2 border-t border-gray-700">
-					<a href="#" class="block hover:text-gray-400">Usuarios</a>
-				</li>
-				<li class="py-2 border-t border-gray-700">
-					<a href="#" class="block hover:text-gray-400">Configuración</a>
-				</li>
-				<li class="py-2 border-t border-gray-700">
-					<a href="#" class="block hover:text-gray-400">Ayuda</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<%= render partial: 'welcome_page/admin_bar' %> 
 	<!-- Main Content -->
 	<div class="w-full sm:w-3/4 p-8">
 		<h2 class="text-2xl font-bold mb-4">Bienvenido al Panel de Administración</h2>

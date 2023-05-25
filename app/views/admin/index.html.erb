@@ -1,0 +1,76 @@
+<div class="flex flex-col sm:flex-row">
+	<!-- Sidebar -->
+	<%= render partial: 'welcome_page/admin_bar' %> 
+	<div class="w-full sm:w-3/4 p-8">
+		<h2 class="text-2xl font-bold mb-4">Bienvenido al Panel de Administración</h2>
+		<div class="bg-red-600 rounded-lg p-4">
+			<!-- Aquí puedes agregar el contenido de tu dashboard -->
+			<div class="p-4">
+				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+					<table class="min-w-full">
+						<thead class="bg-gray-200">
+							<tr>
+								<th class="py-2 px-4">Localidad</th>
+								<th class="py-2 px-4">Tipo</th>
+								<th class="py-2 px-4">Nombre</th>
+								<th class="py-2 px-4">Editar</th>
+								<th class="py-2 px-4">Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="py-2 px-4">John Doe</td>
+								<td class="py-2 px-4">28</td>
+								<td class="py-2 px-4">john@example.com</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4">Jane Smith</td>
+								<td class="py-2 px-4">35</td>
+								<td class="py-2 px-4">jane@example.com</td>
+							</tr>
+							<!-- Agrega más filas de datos según sea necesario -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('DisponibleAdmin.png') %>" alt="Imagen 1">
+					<div>
+						<h2 class="text-xl font-semibold">Parqueaderos Disponibles</h2>
+						<h2 class="text-gray-600 text-3xl"> 5 </h2>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('ActivoAdmin.webp') %>" alt="Imagen 2">
+					<div>
+						<h2 class="text-xl font-semibold">Parqueadros Activos</h2>
+						<h2 class="text-gray-600 text-3xl">4</h2>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('InactivoAdmin.webp') %>" alt="Imagen 3">
+					<div>
+						<h2 class="text-xl font-semibold">Parqueaderos Inactivos</h2>
+						<h2 class="text-gray-600 text-3xl">5</h2>
+					</div>
+				</div>
+			</div>
+		<section id="servicios" class="container mx-auto py-12 h-100">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
+						<div>
+							<h2 class="text-xl font-semibold">Registrar Administrador</h2>
+							<%= link_to "Registrar", new_parking_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto form-input mt-1 py-3 px-4 block w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-50" %>
+						</div>
+					</div>
+				</div>
+			</div>
+  
+  	</section>
+	</div>
+</div>
