@@ -7,21 +7,37 @@ class CityParkingController < ApplicationController
 
   def create
     @city = CityParking.new(name: city_type_params[:name])
-    if @city.save 
-      flash[:success] = "Se registro el tipo de parqueadero"
-      redirect_to parkings_path
-    else
+    all_city = CityParking.all.pluck(:name)
+    begin
+      if !(all_city.map(&:upcase).include?(city_type_params[:name].upcase))
+        if @city.save 
+          flash[:success] = "Se registro el tipo de parqueadero"
+          redirect_to parkings_path
+        else
+          flash[:error] = "No se pudo registrar el parqueadero]"
+          redirect_to new_city_parking_path
+        end
+      else
+        flash[:error] = "No se pudo registrar el parqueadero, revisa si ya esta creado"
+        redirect_to parkings_path
+      end
+    rescue Exception => e 
       flash[:error] = "No se pudo registrar el parqueadero]"
-      redirect_to new_city_parking_path
+      redirect_to parkings_path
     end
   end
 
   def destroy 
     @city = CityParking.find(params[:id].to_i)
-    if @city.destroy
-      flash[:success] = "Se elimino el tipo de parqueadero"
-      redirect_to parkings_path
-    else
+    begin
+      if @city.destroy
+        flash[:success] = "Se elimino el tipo de parqueadero"
+        redirect_to parkings_path
+      else
+        flash[:error] = "No se pudo eliminar el parqueadero"
+        redirect_to parkings_path
+      end
+    rescue Exception => e
       flash[:error] = "No se pudo eliminar el parqueadero"
       redirect_to parkings_path
     end
@@ -52,6 +68,6 @@ class CityParkingController < ApplicationController
   private 
 
   def city_type_params 
-    params.permit(:name) 
+    params.require(:city_parking).permit(:name) 
   end
 end
