@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :creditcards
 
   before_save :client_assignation
+  after_create :automatic_active_user
 
   def is_root? 
     if self.role.name == "root" && self.role.present?
@@ -34,5 +35,9 @@ class User < ApplicationRecord
 
   def client_assignation 
     self.role_id = 3 if !role_id.present?
+  end
+
+  def automatic_active_user 
+    self.update(status: true)
   end
 end

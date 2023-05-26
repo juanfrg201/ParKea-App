@@ -1,9 +1,9 @@
 class Creditcard < ApplicationRecord
 
   belongs_to :user
-	belongs_to :company_credit_card
+  belongs_to :company_credit_card
 
-	validates :number_card, presence: true, credit_card_number: true
+  validates :number_card, presence: true, credit_card_number: true
   validates :exp_date, presence: true
 
 

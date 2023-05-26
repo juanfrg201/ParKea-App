@@ -30,7 +30,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :admin , only: [:new , :index, :create, :destroy, :update] 
+  resources :admin , only: [:new , :index, :create, :destroy, :update] do
+    collection do
+      patch :enable
+      patch :disable
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

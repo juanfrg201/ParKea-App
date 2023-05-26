@@ -9,27 +9,32 @@
 				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
 					<table class="min-w-full">
 						<thead class="bg-gray-200">
-							<tr>
-								<th class="py-2 px-4">Localidad</th>
-								<th class="py-2 px-4">Tipo</th>
-								<th class="py-2 px-4">Nombre</th>
-								<th class="py-2 px-4">Editar</th>
-								<th class="py-2 px-4">Eliminar</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="py-2 px-4">John Doe</td>
-								<td class="py-2 px-4">28</td>
-								<td class="py-2 px-4">john@example.com</td>
-							</tr>
-							<tr>
-								<td class="py-2 px-4">Jane Smith</td>
-								<td class="py-2 px-4">35</td>
-								<td class="py-2 px-4">jane@example.com</td>
-							</tr>
-							<!-- Agrega más filas de datos según sea necesario -->
-						</tbody>
+              <tr>
+                <th class="py-2 px-4 align-middle ">Nombre</th>
+                <th class="py-2 px-4 align-middle">Apellido</th>
+                <th class="py-2 px-4 align-middle">Email</th>
+                <th class="py-2 px-4 align-middle">Rol</th>
+								<th class="py-2 px-4 align-middle">Esta Activo</th>
+                <th class="py-2 px-4 align-middle">Activar</th>
+								<th class="py-2 px-4 align-middle">Desactivar</th>
+                <th class="py-2 px-4 align-middle">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @user.sort.each do |user| %>	
+                <tr>
+                  <td class="py-2 px-4 text-center align-middle">juan</td>
+                  <td class="py-2 px-4 text-center align-middle">felipe</td>
+                  <td class="py-2 px-4 text-center align-middle"><%= user.email %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= user.role.present? ? user.role.name : "No" %></td>
+  
+									<td class="py-2 px-4 text-center align-middle"><%= user.status == true ? "Si" : "No" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Activar", enable_admin_index_path(id: user.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Desactivar", disable_admin_index_path(id: user.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Eliminar", admin_path(user.id), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este tipo de estacionamiento?' }, class: "inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                </tr>
+              <% end %>
+            </tbody>
 					</table>
 				</div>
 			</div>
@@ -40,22 +45,22 @@
 				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
 					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('DisponibleAdmin.png') %>" alt="Imagen 1">
 					<div>
-						<h2 class="text-xl font-semibold">Parqueaderos Disponibles</h2>
-						<h2 class="text-gray-600 text-3xl"> 5 </h2>
+						<h2 class="text-xl font-semibold">Usuarios Existentes</h2>
+						<h2 class="text-gray-600 text-3xl"> <%= User.all.count %></h2>
 					</div>
 				</div>
 				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
 					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('ActivoAdmin.webp') %>" alt="Imagen 2">
 					<div>
-						<h2 class="text-xl font-semibold">Parqueadros Activos</h2>
-						<h2 class="text-gray-600 text-3xl">4</h2>
+						<h2 class="text-xl font-semibold">Usarios Adminisradores Activos</h2>
+						<h2 class="text-gray-600 text-3xl"> <%= User.all.where(status: true).count %> </h2>
 					</div>
 				</div>
 				<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
 					<img class="h-16 w-16 rounded-full mr-4" src="<%= image_path('InactivoAdmin.webp') %>" alt="Imagen 3">
 					<div>
-						<h2 class="text-xl font-semibold">Parqueaderos Inactivos</h2>
-						<h2 class="text-gray-600 text-3xl">5</h2>
+						<h2 class="text-xl font-semibold">Usarios Adminisradores Inactivos</h2>
+						<h2 class="text-gray-600 text-3xl"><%= User.all.where(status: false).count %></h2>
 					</div>
 				</div>
 			</div>
@@ -65,12 +70,11 @@
 					<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
 						<div>
 							<h2 class="text-xl font-semibold">Registrar Administrador</h2>
-							<%= link_to "Registrar", new_parking_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto form-input mt-1 py-3 px-4 block w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-50" %>
+							<%= link_to "Registrar", new_admin_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto form-input mt-1 py-3 px-4 block w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-50" %>
 						</div>
 					</div>
 				</div>
 			</div>
-  
-  	</section>
+		</section>
 	</div>
 </div>
