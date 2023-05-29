@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :role
   has_many :creditcards
+  has_many :bookings
 
   before_save :client_assignation
   after_create :automatic_active_user

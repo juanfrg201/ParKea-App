@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'booking/index'
+  get 'booking/create'
+  get 'booking/destroy'
+  get 'booking/enable'
+  get 'booking/disable'
+  get 'booking/new'
   devise_for :users
 
   devise_scope :user do  
@@ -31,6 +37,13 @@ Rails.application.routes.draw do
   end
 
   resources :admin , only: [:new , :index, :create, :destroy, :update] do
+    collection do
+      patch :enable
+      patch :disable
+    end
+  end
+
+  resources :bookings , only: [:new , :index, :create, :destroy, :update] do
     collection do
       patch :enable
       patch :disable

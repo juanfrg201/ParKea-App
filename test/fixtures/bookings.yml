@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plate: MyString
+  car_brand: MyString
+  user: one
+  parking: one
+  status: MyString
+  start_hour: 2023-05-28
+  finish_hour: 2023-05-28
+  date: 2023-05-28
+
+two:
+  plate: MyString
+  car_brand: MyString
+  user: two
+  parking: two
+  status: MyString
+  start_hour: 2023-05-28
+  finish_hour: 2023-05-28
+  date: 2023-05-28

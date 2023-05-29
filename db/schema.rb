@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_000404) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_28_170938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.string "plate"
+    t.string "car_brand"
+    t.bigint "user_id", null: false
+    t.bigint "parking_id", null: false
+    t.boolean "status"
+    t.date "start_hour"
+    t.date "finish_hour"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_id"], name: "index_bookings_on_parking_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "city_parkings", force: :cascade do |t|
     t.string "name"
@@ -85,6 +100,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_000404) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "bookings", "parkings"
+  add_foreign_key "bookings", "users"
   add_foreign_key "creditcards", "company_credit_cards"
   add_foreign_key "creditcards", "users"
   add_foreign_key "parkings", "city_parkings"
