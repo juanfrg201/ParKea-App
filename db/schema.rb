@@ -10,13 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_28_170938) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_30_021140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookings", force: :cascade do |t|
-    t.string "plate"
-    t.string "car_brand"
     t.bigint "user_id", null: false
     t.bigint "parking_id", null: false
     t.boolean "status"
@@ -25,6 +23,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_170938) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "client_car_id", null: false
+    t.bigint "creditcard_id", null: false
+    t.index ["client_car_id"], name: "index_bookings_on_client_car_id"
+    t.index ["creditcard_id"], name: "index_bookings_on_creditcard_id"
     t.index ["parking_id"], name: "index_bookings_on_parking_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -34,6 +36,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_170938) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_active"
+  end
+
+  create_table "client_cars", force: :cascade do |t|
+    t.string "plate"
+    t.string "brand"
+    t.string "reference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_client_cars_on_user_id"
   end
 
   create_table "company_credit_cards", force: :cascade do |t|
@@ -100,8 +112,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_170938) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "bookings", "client_cars"
+  add_foreign_key "bookings", "creditcards"
   add_foreign_key "bookings", "parkings"
   add_foreign_key "bookings", "users"
+  add_foreign_key "client_cars", "users"
   add_foreign_key "creditcards", "company_credit_cards"
   add_foreign_key "creditcards", "users"
   add_foreign_key "parkings", "city_parkings"

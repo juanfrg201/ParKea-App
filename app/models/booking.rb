@@ -1,9 +1,8 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :parking
+  belongs_to :client_car
 
-  validates :plate, presence: true
-  validates :car_brand, presence: true
   validates :status, presence: true
   validates :start_hour, presence: true
   validates :finish_hour, presence: true

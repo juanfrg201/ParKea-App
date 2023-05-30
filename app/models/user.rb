@@ -6,6 +6,7 @@ class User < ApplicationRecord
   belongs_to :role
   has_many :creditcards
   has_many :bookings
+  has_many :client_cars
 
   before_save :client_assignation
   after_create :automatic_active_user

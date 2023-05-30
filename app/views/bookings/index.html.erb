@@ -1,0 +1,124 @@
+<main class="bg-gray-200">
+	<section id="servicios" class="container mx-auto py-12">
+		<div class="flex flex-wrap">
+			<div class="w-full md:w-1/2 lg:w-2/3">
+				<div id="map" style="width: 92%; height: 400px;"></div>
+				<script>
+					function initMap() {
+						var geocoder = new google.maps.Geocoder();
+						var map = new google.maps.Map(document.getElementById('map'), {
+							zoom: 14
+						});
+						var bounds = new google.maps.LatLngBounds();
+						
+						var markers = []; // Array para almacenar los marcadores
+						
+						<% @addresses.each do |address| %>
+							geocoder.geocode({ address: '<%= address.full_address %>' }, function(results, status) {
+								if (status === 'OK') {
+									var location = results[0].geometry.location;
+									var marker = new google.maps.Marker({
+										map: map,
+										position: location
+									});
+									bounds.extend(location);
+									map.fitBounds(bounds);
+									
+									markers.push({ marker: marker, address: '<%= address.full_address %>' }); // Agregar el marcador al array de marcadores
+								} else {
+									console.error('Geocode was not successful for the following reason: ' + status);
+								}
+							});
+						<% end %>
+						
+						// Función para filtrar los marcadores
+						function filterMarkers(filterValue) {
+							markers.forEach(function(item) {
+								var addressText = item.address.toLowerCase();
+								var marker = item.marker;
+
+								if (addressText.includes(filterValue)) {
+									marker.setVisible(true);
+								} else {
+									marker.setVisible(false);
+								}
+							});
+						}
+
+						// Agrega el evento de escucha al campo de texto del filtro
+						document.addEventListener('DOMContentLoaded', function() {
+							var addressFilterSelect = document.getElementById('address-filter');
+
+							addressFilterSelect.addEventListener('change', function() {
+								var filterValue = addressFilterSelect.value.toLowerCase();
+								filterMarkers(filterValue);
+							});
+							
+							// Filtrar los marcadores inicialmente según el valor seleccionado
+							var initialFilterValue = addressFilterSelect.value.toLowerCase();
+							filterMarkers(initialFilterValue);
+							
+							// Obtener la geolocalización del usuario
+							if (navigator.geolocation) {
+								navigator.geolocation.getCurrentPosition(function(position) {
+									var userLocation = {
+										lat: position.coords.latitude,
+										lng: position.coords.longitude
+									};
+
+									var userMarker = new google.maps.Marker({
+										position: userLocation,
+										map: map,
+										icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+									});
+
+									map.setCenter(userLocation);
+								});
+							}
+						});
+					}
+				</script>
+				<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.config.google_maps_api_key %>&callback=initMap" async defer></script>
+			</div>
+			<div class="w-full md:w-1/2 lg:w-1/3">
+				<%= form_with(model: Booking.new, url: bookings_path, method: :post, local: true, class: "bg-gray-100 p-4 rounded-lg") do |f| %>
+					<h2 class="text-lg font-semibold mb-4">Formulario</h2>
+					<div class="flex space-x-4">
+						<div class="w-1/2 space-y-2">
+							<label class="block font-semibold text-gray-700">Duracion</label>
+							<%= f.select :duration, options_for_select([['30 minutos', '30'], ['1 hora', '60'], ['2 horas', '120'], ['5 horas', '300'], ['24 horas', '1440']]), {}, class: "form-select w-full rounded-md shadow-sm" %>
+						</div>
+						<div class="w-1/2 space-y-2">
+							<label class="block font-semibold text-gray-700">Automovil</label>
+							<%= f.select :car, options_for_select(@current_user_cars_id), {}, class: "form-select w-full rounded-md shadow-sm" %>
+						</div>
+					</div>
+					<div class="flex space-x-4">
+						<div class="mb-4">
+							<label class="block font-semibold text-gray-700">Fecha de reserva</label>
+							<%= f.date_field :reserve_date, class: "form-control w-full rounded-md shadow-sm" %>
+						</div>
+						<div class="w-1/2 space-y-2">
+							<label class="block font-semibold text-gray-700">Hora de Inicio</label>
+							<%= f.time_field :booking_time, class: "form-control w-full rounded-md shadow-sm" %>
+						</div>
+					</div>
+					<div class="flex space-x-4">
+						<div id="address-filters" class="mb-4">
+							<label for="address-filter" class="block font-semibold text-gray-700">Filtrar direcciones:</label>
+							<%= select_tag 'address-filter', options_for_select(Parking.all.pluck(:address)), prompt: 'Selecciona una dirección', class: "form-select w-full rounded-md shadow-sm", id: "address-filter" %>
+						</div>
+						<div class="w-1/2 space-y-2">
+							<label for="address-filter" class="block font-semibold text-gray-700">Tarjeta de pago</label>
+							<%= f.select :method_pay, options_for_select(@pay_methods), {}, class: "form-select w-full rounded-md shadow-sm" %>
+						</div>
+					</div>
+					
+					<%= f.submit "Registrar", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md" %>
+				<% end %>
+			</div>
+		</div>
+	</section>
+</main>
+
+

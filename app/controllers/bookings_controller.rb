@@ -1,9 +1,12 @@
-class BookingController < ApplicationController
+class BookingsController < ApplicationController
   def index
     @addresses = Parking.all
+    @current_user_cars_id = current_user.client_cars.pluck(:id)
+    @pay_methods = current_user.creditcards.pluck(:number_card)
   end
 
   def create
+    
     @booking = Booking.new()
     if @booking.parking_validate_reserve && @booking.parking.validate_spaces_available
       if @booking.save 
@@ -52,6 +55,6 @@ class BookingController < ApplicationController
   private 
 
   def create_booking_params 
-    params.require(:booking).permit()
+    params.require(:booking).permit(:duration, :car, :method_pay)
   end
 end
