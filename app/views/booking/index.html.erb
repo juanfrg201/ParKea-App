@@ -1,0 +1,91 @@
+<main class="bg-gray-200">
+	<section id="servicios" class="container mx-auto py-12">
+		<div class="flex flex-wrap">
+			<div class="w-full md:w-1/2 lg:w-2/3">
+				<div id="map" style="width: 92%; height: 400px;"></div>
+				<script>
+					function initMap() {
+						var geocoder = new google.maps.Geocoder();
+						var map = new google.maps.Map(document.getElementById('map'), {
+							zoom: 14
+						});
+						var bounds = new google.maps.LatLngBounds();
+						
+						var markers = []; // Array para almacenar los marcadores
+						
+						<% @addresses.each do |address| %>
+							geocoder.geocode({ address: '<%= address.full_address %>' }, function(results, status) {
+								if (status === 'OK') {
+									var location = results[0].geometry.location;
+									var marker = new google.maps.Marker({
+										map: map,
+										position: location
+									});
+									bounds.extend(location);
+									map.fitBounds(bounds);
+									
+									markers.push({ marker: marker, address: '<%= address.full_address %>' }); // Agregar el marcador al array de marcadores
+								} else {
+									console.error('Geocode was not successful for the following reason: ' + status);
+								}
+							});
+						<% end %>
+						
+						// Agrega el evento de escucha al campo de texto del filtro
+						var addressFilterInput = document.getElementById('address-filter');
+						
+						addressFilterInput.addEventListener('keyup', function() {
+							var filterValue = addressFilterInput.value.toLowerCase();
+							filterMarkers(filterValue);
+						});
+						
+						function filterMarkers(filterValue) {
+							markers.forEach(function(item) {
+								var addressText = item.address.toLowerCase();
+								var marker = item.marker;
+								
+								if (addressText.includes(filterValue)) {
+									marker.setVisible(true);
+								} else {
+									marker.setVisible(false);
+								}
+							});
+						}
+					}
+				</script>
+				<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.config.google_maps_api_key %>&callback=initMap" async defer></script>
+			</div>
+			<div class="w-full md:w-1/2 lg:w-1/3">
+				<form class="bg-gray-100 p-4 rounded-lg">
+					<h2 class="text-lg font-semibold mb-4">Formulario</h2>
+					<div class="mb-4">
+						<label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+						<input type="text" id="name" name="name" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+					</div>
+					<div class="mb-4">
+						<label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+						<input type="email" id="email" name="email" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+					</div>
+					<div class="mb-4">
+						<label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
+						<textarea id="message" name="message" rows="4" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+					</div>
+					
+					<div id="address-filters" class="mb-4">
+						<label for="address-filter">Filtrar direcciones:</label>
+						<input type="text" id="address-filter" name="address-filter" class="border border-gray-300 rounded-md px-2 py-1">
+					</div>
+					
+					<button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Enviar</button>
+				</form>
+			</div>
+		</div>
+	</section>
+  
+
+</main>
+
+
+
+
+

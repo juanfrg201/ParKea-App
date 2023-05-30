@@ -7,6 +7,8 @@ class ParkingsController < ApplicationController
 		@parkings = Parking.all
     @parking_types = ParkingType.all
     @city = CityParking.all
+    @addresses = Parking.all
+    @address = Parking.last
   end
 
   def new

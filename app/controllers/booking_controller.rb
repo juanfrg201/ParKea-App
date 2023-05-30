@@ -1,5 +1,6 @@
 class BookingController < ApplicationController
   def index
+    @addresses = Parking.all
   end
 
   def create
