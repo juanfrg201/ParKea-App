@@ -10,13 +10,13 @@
         </div>
         <div class="w-1/2 space-y-2">
           <%= f.label :city_parking, class: "block font-semibold text-gray-700" %>
-          <%= f.select :city_parking, options_for_select(CityParking.all.pluck(:name)), {}, class: "form-select w-full rounded-md shadow-sm" %>
+          <%= f.select :city_parking, options_for_select(@city), {}, class: "form-select w-full rounded-md shadow-sm" %>
         </div>
       </div>
       <div class="flex space-x-4">
         <div class="w-1/2 space-y-2">
           <%= f.label :parking_type, class: "block font-semibold text-gray-700" %>
-          <%= f.select :parking_type, options_for_select(ParkingType.all.pluck(:name)), {}, class: "form-select w-full rounded-md shadow-sm" %>
+          <%= f.select :parking_type, options_for_select(@parking_types), {}, class: "form-select w-full rounded-md shadow-sm" %>
         </div>
         <div class="w-1/2 space-y-2">
           <%= f.label :rates, class: "block font-semibold text-gray-700" %>
@@ -41,6 +41,10 @@
           <%= f.label :address, class: "block font-semibold text-gray-700" %>
           <%= f.text_field :address, class: "form-input w-full rounded-md shadow-sm" %>
         </div>
+      <div class="field">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+      </div>
 
       <div>
         <%= f.submit "Registrar", class: "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200" %>

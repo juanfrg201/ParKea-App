@@ -43,7 +43,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bookings
+  resources :bookings do 
+    collection do
+      get :reserve_index
+      patch :enable
+      patch :disable
+    end
+  end
 
   resources :client_cars
 

@@ -3,10 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :parking
   belongs_to :client_car
 
-  validates :status, presence: true
-  validates :start_hour, presence: true
-  validates :finish_hour, presence: true
-  validates :date, presence: true
+
 
   def parking_is_active 
     validate = self.finish_hour < Date.today ? true : false

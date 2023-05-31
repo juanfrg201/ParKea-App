@@ -1,0 +1,58 @@
+<div class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-3xl font-semibold mb-4">Detalles del Parqueadero</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Imagen del parqueadero -->
+        <div>
+					<img src="<%= url_for(@booking.parking.image) %>" alt="Parqueadero" class="w-full rounded-lg shadow-md">
+        </div>
+        <!-- Información del parqueadero -->
+        <div>
+          <h2 class="text-lg font-semibold mb-2"><%= @booking.parking.name %></h2>
+          <p class="text-gray-600">Ubicación: <%= @booking.parking.address %></p>
+          <p class="text-gray-600">Capacidad: <%= @booking.parking.tota_spaces_availble %></p>
+					<p class="text-gray-600">Tipo: <%= @booking.parking.parking_type.name %></p>
+          <p class="text-gray-600">Horario: 24 horas</p>
+          <p class="text-gray-600">Tarifa: $10/hora</p>
+        </div>
+        <!-- Botón de reserva -->
+        <div class="flex items-center justify-center">
+          <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Reservar Ahora
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Descripción del parqueadero -->
+    <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+      <h2 class="text-lg font-semibold mb-2">Descripción</h2>
+      <p class="text-gray-600">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in ante eu odio blandit volutpat at eu leo.
+        Mauris suscipit justo et magna efficitur, at placerat neque convallis. Sed volutpat est eu neque tincidunt
+        fringilla. Integer volutpat felis a libero semper, a varius nisl pulvinar.
+      </p>
+    </div>
+    <!-- Comentarios de los usuarios -->
+    <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+      <h2 class="text-lg font-semibold mb-4">Comentarios de Usuarios</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Comentario 1 -->
+        <div class="bg-gray-200 rounded-lg p-4">
+          <p class="text-gray-600 mb-2">"Excelente parqueadero. Buena atención y seguridad."</p>
+          <p class="text-gray-500">- Usuario1</p>
+        </div>
+        <!-- Comentario 2 -->
+        <div class="bg-gray-200 rounded-lg p-4">
+          <p class="text-gray-600 mb-2">"Muy conveniente y accesible. Lo recomiendo."</p>
+          <p class="text-gray-500">- Usuario2</p>
+        </div>
+        <!-- Comentario 3 -->
+        <div class="bg-gray-200 rounded-lg p-4">
+          <p class="text-gray-600 mb-2">"Buenas instalaciones y tarifas razonables."</p>
+          <p class="text-gray-500">- Usuario3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

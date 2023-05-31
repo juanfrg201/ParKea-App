@@ -1,20 +1,18 @@
 class BookingsController < ApplicationController
   def index
     @addresses = Parking.all
-    @current_user_cars_id = current_user.client_cars.pluck(:id)
+    @current_user_cars_id = current_user.client_cars.pluck(:plate)
     @pay_methods = current_user.creditcards.pluck(:number_card)
+    @options = Parking.pluck(:address, :id)
   end
 
   def create
-    
-    @booking = Booking.new()
-    if @booking.parking_validate_reserve && @booking.parking.validate_spaces_available
-      if @booking.save 
-        @booking.parking.parking_reserve
-      else
-        flash[:error] = "No se pudo reservar el parqueadero"
-      end
+    reserve_parking_object = ReserveParkingObject.new(create_booking_params, current_user.id)
+    if reserve_parking_object.create_booking    
+      redirect_to reserve_index_bookings_path
+      flash[:success] = "Se pudo reservar el parqueadero"
     else  
+      redirect_to bookings_path
       flash[:error] = "No se pudo reservar el parqueadero, revise las fechas o no hay disponibilidad"
     end
   end
@@ -31,7 +29,7 @@ class BookingsController < ApplicationController
       else
         flash[:error] = "No se elimino la reserva"
       end  
-    rescue Exeption => e
+    rescue Exception => e
       flash[:error] = "No se elimino la reserva, revisa si tiene dependencia"
     end
   end
@@ -39,13 +37,31 @@ class BookingsController < ApplicationController
   def enable
     @booking = Booking.find(params[:id])
     if @booking.update(status: true)
-      flash[:success] = "Se activo la reserva"
+      redirect_to reserve_index_bookings_path
+      flash[:success] = "Se marco ingreso del carro"
     else
-      flash[:error] = "No se pudon activar la reserva"
+      redirect_to reserve_index_bookings_path
+      flash[:error] = "No se pudo marcar ingreso"
     end
   end
 
+  def show 
+    @booking = Booking.find(params[:id])
+  end
+
+  def reserve_index 
+    @client_booking = Booking.where(user_id: current_user.id).all
+  end
+
   def disable
+    @booking = Booking.find(params[:id])
+    if @booking.update(status: false)
+      redirect_to reserve_index_bookings_path
+      flash[:success] = "Se marco salida"
+    else
+      redirect_to reserve_index_bookings_path
+      flash[:error] = "No se pudo desmarcar ingreso"
+    end
   end
 
   def new
@@ -55,6 +71,6 @@ class BookingsController < ApplicationController
   private 
 
   def create_booking_params 
-    params.require(:booking).permit(:duration, :car, :method_pay)
+    params.require(:booking).permit(:duration, :car, :method_pay, :booking_time, :reserve_date, :address_filter)
   end
 end

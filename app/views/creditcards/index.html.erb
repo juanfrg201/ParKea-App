@@ -1,52 +1,27 @@
-<section class="bg-gray-50 dark:bg-red-600">
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-0">
-    <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-      Tarjetas Agregadas
-    </a>
-    <div class="max-w-4xl w-full overflow-x-auto">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-lg">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-4">
-              Nombre
-            </th>
-            <th scope="col" class="px-6 py-4">
-              Compañía
-            </th>
-            <th scope="col" class="px-6 py-4">
-              Número
-            </th>
-            <th scope="col" class="px-6 py-4">
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <% if @creditcard %>
-        <tbody>
-          <% @creditcard.each do |credit| %>
-						<% if credit.credit_cart_active? %>
-							<tr class="border-b border-gray-200 dark:border-gray-700">
-								<td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-									<%= credit.alias %>
-								</td>
-								<td class="px-6 py-4">
-									<%= credit.company_credit_card.name %>
-								</td>
-								<td class="px-6 py-4">
-									<%= credit.number_card %>
-								</td>
-								<td class="px-6 py-4">
-									<%= button_to 'Eliminar', creditcard_path(credit.id), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "text-blue-500 hover:text-blue-700 font-medium" %>
-								</td>
-							</tr>
-						<% end %>
-          <% end %>
-        </tbody>
+<section class="bg-gray-50 dark:bg-gray-200 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Tarjeta de crédito 1 -->
+      <% if @creditcard %>
+        <% @creditcard.each do |credit| %>
+          <div class="bg-white rounded-lg shadow-md p-6 <% if credit.company_credit_card.name == 'visa' %>bg-blue-400<% elsif credit.company_credit_card.name == 'MasterCard' || credit.company_credit_card.name == 'mastercard' %>bg-red-400<% elsif credit.company_credit_card.name == 'diners' %>bg-yellow-200<% else %>bg-gray-200<% end %>">
+            <div class="flex justify-between mb-4">
+              <h2 class="text-lg font-semibold"><%= credit.alias %></h2>
+              <%= credit.company_credit_card.name %>
+            </div>
+            <p>Número de tarjeta: <%= credit.number_card %></p>
+            <p>Fecha de expiración: <%= credit.exp_date %></p>
+            <br>
+            <%= button_to 'Eliminar', creditcard_path(credit.id), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+          </div>
         <% end %>
-      </table>
+      <% end %>
+      <!-- Agregar más tarjetas de crédito aquí -->
     </div>
+    <br>
     <%= link_to 'Agregar método de pago', new_creditcard_path, class: "bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6" %>
   </div>
+
 </section>
 
 

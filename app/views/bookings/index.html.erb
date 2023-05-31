@@ -47,7 +47,7 @@
 
 						// Agrega el evento de escucha al campo de texto del filtro
 						document.addEventListener('DOMContentLoaded', function() {
-							var addressFilterSelect = document.getElementById('address-filter');
+							var addressFilterSelect = document.getElementById('address_filter');
 
 							addressFilterSelect.addEventListener('change', function() {
 								var filterValue = addressFilterSelect.value.toLowerCase();
@@ -104,12 +104,12 @@
 						</div>
 					</div>
 					<div class="flex space-x-4">
-						<div id="address-filters" class="mb-4">
-							<label for="address-filter" class="block font-semibold text-gray-700">Filtrar direcciones:</label>
-							<%= select_tag 'address-filter', options_for_select(Parking.all.pluck(:address)), prompt: 'Selecciona una dirección', class: "form-select w-full rounded-md shadow-sm", id: "address-filter" %>
+						<div id="address-_ilters" class="mb-4">
+							<label for="address_filter" class="block font-semibold text-gray-700">Filtrar direcciones:</label>
+							<%= f.select :address_filter, options_for_select(@options), prompt: 'Selecciona una dirección', class: "form-select w-full rounded-md shadow-sm", id: "address_filter" %>
 						</div>
 						<div class="w-1/2 space-y-2">
-							<label for="address-filter" class="block font-semibold text-gray-700">Tarjeta de pago</label>
+							<label for="address_filter" class="block font-semibold text-gray-700">Tarjeta de pago</label>
 							<%= f.select :method_pay, options_for_select(@pay_methods), {}, class: "form-select w-full rounded-md shadow-sm" %>
 						</div>
 					</div>

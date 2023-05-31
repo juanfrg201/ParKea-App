@@ -13,13 +13,14 @@ class ParkingsController < ApplicationController
 
   def new
     @parking = Parking.new
+    @parking_types = ParkingType.all.pluck(:name, :id)
+    @city = CityParking.all.pluck(:name, :id)
   end
 
   def create
-    city_parking_id = CityParking.find_by(name: parking_params[:city_parking]).id
-    parking_type_id = ParkingType.find_by(name: parking_params[:parking_type]).id
-    @parking = Parking.new(name: parking_params[:name], rates: parking_params[:rates].to_i, spaces_available: parking_params[:total_spaces_available].to_i, availability: parking_params[:availability], tota_spaces_availble: parking_params[:total_spaces_available].to_i, address: parking_params[:address], fidelity: parking_params[:fidelity], city_parking_id: city_parking_id,
-      parking_type_id: parking_type_id)
+    @parking = Parking.new(name: parking_params[:name], rates: parking_params[:rates].to_i, spaces_available: parking_params[:total_spaces_available].to_i, availability: parking_params[:availability], tota_spaces_availble: parking_params[:total_spaces_available].to_i, address: parking_params[:address], fidelity: parking_params[:fidelity], city_parking_id: parking_params[:city_parking],
+      parking_type_id: parking_params[:parking_type].to_i)
+    @parking.image.attach(params[:parking][:image]) if params[:parking][:image]
     if @parking.save
       flash[:success] = "Se regstro el parqueadero"
       redirect_to parkings_path
@@ -67,8 +68,8 @@ class ParkingsController < ApplicationController
 
   private
 
-  def parking_params 
-    params.require(:parking).permit(:name, :rates, :availability, :fidelity, :address, :city_parking, :parking_type, :total_spaces_available)
+  def parking_params
+    params.require(:parking).permit(:name, :rates, :availability, :fidelity, :address, :city_parking, :parking_type, :total_spaces_available, :image)
   end
 
 end
