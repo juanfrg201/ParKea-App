@@ -2,7 +2,6 @@ class CityParking < ApplicationRecord
   has_many :parkings
 
   geocoded_by :name
-  after_validation :geocode
 
   def country
     geocode_result = Geocoder.search(name).first

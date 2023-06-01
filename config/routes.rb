@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     collection do
       patch :enable
       patch :disable
+      get :report 
+      get :statistics
     end
   end
 

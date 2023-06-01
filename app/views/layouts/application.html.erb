@@ -9,6 +9,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <% if user_signed_in? && current_user.is_client? %>

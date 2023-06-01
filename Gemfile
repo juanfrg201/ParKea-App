@@ -11,6 +11,9 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem 'activestorage'
 gem 'cancancan'
 gem 'geocoder'
+gem "groupdate"
+gem 'esbuild-rails'
+
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -77,3 +80,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "chartkick", "~> 5.0"

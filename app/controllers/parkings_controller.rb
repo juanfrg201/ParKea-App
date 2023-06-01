@@ -66,10 +66,53 @@ class ParkingsController < ApplicationController
     end
   end
 
+  def statistics 
+    @parking_stats = Parking.group(:created_at).count
+    filter_parking_table = params_filter[:filter_parking_table] 
+    @data_parking = validate_filter_parking_functions(filter_parking_table)
+    @data_booking = validate_filter_booking_functions(params_filter[:filter_booking_table])
+
+  end
+
+  def report 
+  end
+
   private
+
+  def validate_filter_parking_functions(filter_parking_table)
+    case filter_parking_table
+    when 'city'
+      Parking.joins(:city_parking).group("city_parkings.name").count
+    when 'types'
+      Parking.joins(:parking_type).group("parking_types.name").count
+    when 'disponibility'
+      Parking.group(:availability).count
+    when 'rate'
+      Parking.group(:rates).count
+    else 
+      nil
+    end
+  end
+
+  def validate_filter_booking_functions(filter_parking_table)
+    case filter_parking_table
+    when 'date'
+      Booking.group(:date).count
+    when 'parking'
+      Booking.joins(:parking).group("parkings.name").count
+    when 'status'
+      Booking.group(:status).count
+    else 
+      nil
+    end
+  end
 
   def parking_params
     params.require(:parking).permit(:name, :rates, :availability, :fidelity, :address, :city_parking, :parking_type, :total_spaces_available, :image)
+  end
+
+  def params_filter
+    params.permit(:filter_parking_table, :filter_booking_table) 
   end
 
 end

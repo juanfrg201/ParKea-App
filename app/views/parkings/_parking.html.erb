@@ -1,0 +1,13 @@
+<div class="container mx-auto px-4">
+	<div class="flex flex-wrap">
+		<h2 class="text-2xl font-bold mb-4">Estadísticas Parqueaderos</h2>
+		<%= column_chart @data_parking %>
+		<div class="mt-4">
+			<label class="text-sm font-bold">Filtrar por:</label>
+			<%= form_with url: statistics_parkings_path, method: :get, class: "flex items-center" do |form| %>
+				<%= form.select :filter_parking_table, options_for_select([['Ciudades', 'city'], ['Tipos de parqueadero', 'types'], ['Disponibilidad', 'disponibility'], ['Calificacion', 'rate']]), { include_blank: 'Todos' }, class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+				<%= form.submit 'Filtrar', class: "ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300" %>
+			<% end %>
+		</div>		
+	</div>
+</div>

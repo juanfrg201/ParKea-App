@@ -8,23 +8,20 @@ class CityParkingController < ApplicationController
   def create
     @city = CityParking.new(name: city_type_params[:name])
     all_city = CityParking.all.pluck(:name)
-    begin
-      if !(all_city.map(&:upcase).include?(city_type_params[:name].upcase))
-        if @city.save 
-          flash[:success] = "Se registro el tipo de parqueadero"
-          redirect_to parkings_path
-        else
-          flash[:error] = "No se pudo registrar el parqueadero]"
-          redirect_to new_city_parking_path
-        end
-      else
-        flash[:error] = "No se pudo registrar el parqueadero, revisa si ya esta creado"
+    
+    if !(all_city.map(&:upcase).include?(city_type_params[:name].upcase))
+      if @city.save 
+        flash[:success] = "Se registro el tipo de parqueadero"
         redirect_to parkings_path
+      else
+        flash[:error] = "No se pudo registrar el parqueadero]"
+        redirect_to new_city_parking_path
       end
-    rescue Exception => e 
-      flash[:error] = "No se pudo registrar el parqueadero]"
+    else
+      flash[:error] = "No se pudo registrar el parqueadero, revisa si ya esta creado"
       redirect_to parkings_path
     end
+    
   end
 
   def destroy 
