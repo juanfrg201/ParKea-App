@@ -13,6 +13,10 @@ gem 'cancancan'
 gem 'geocoder'
 gem "groupdate"
 gem 'esbuild-rails'
+gem 'axlsx'
+gem 'zip-zip'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary-edge'
 
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

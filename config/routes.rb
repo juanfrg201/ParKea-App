@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'charts/export_to_pdf'
+  get 'exports/export_to_excel_parking'
+  get 'exports/export_to_excel_booking'
   get 'booking/index'
   get 'booking/create'
   get 'booking/destroy'
@@ -39,6 +42,13 @@ Rails.application.routes.draw do
   end
 
   resources :admin , only: [:new , :index, :create, :destroy, :update] do
+    collection do
+      patch :enable
+      patch :disable
+    end
+  end
+
+  resources :fidelities, only: [:index, :create, :destroy] do
     collection do
       patch :enable
       patch :disable

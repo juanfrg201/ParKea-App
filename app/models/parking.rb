@@ -3,7 +3,7 @@ class Parking < ApplicationRecord
   belongs_to :parking_type
 
   has_one_attached :image
-  
+  has_many :fidelities
   validates :name, presence: true
   validates :tota_spaces_availble, presence: true
   validates :spaces_available, presence: true

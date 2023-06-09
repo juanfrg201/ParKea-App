@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_131555) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_09_130421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_131555) do
     t.index ["user_id"], name: "index_creditcards_on_user_id"
   end
 
+  create_table "fidelities", force: :cascade do |t|
+    t.boolean "active"
+    t.bigint "user_id", null: false
+    t.bigint "parking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_id"], name: "index_fidelities_on_parking_id"
+    t.index ["user_id"], name: "index_fidelities_on_user_id"
+  end
+
   create_table "parking_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -152,6 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_131555) do
   add_foreign_key "client_cars", "users"
   add_foreign_key "creditcards", "company_credit_cards"
   add_foreign_key "creditcards", "users"
+  add_foreign_key "fidelities", "parkings"
+  add_foreign_key "fidelities", "users"
   add_foreign_key "parkings", "city_parkings"
   add_foreign_key "parkings", "parking_types"
   add_foreign_key "users", "roles"

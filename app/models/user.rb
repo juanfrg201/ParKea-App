@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :creditcards
   has_many :bookings
   has_many :client_cars
-
+  has_many :fidelities
   before_save :client_assignation
   after_create :automatic_active_user
 
