@@ -1,4 +1,4 @@
-<div class="flex flex-col sm:flex-row">
+<div class="min-h-screen flex flex-col sm:flex-row">
 	<!-- Sidebar -->
 	<%= render partial: 'welcome_page/admin_bar' %> 
 	<!-- Main Content -->
@@ -6,34 +6,6 @@
 		<h2 class="text-2xl font-bold mb-4">Bienvenido al Panel de Administración</h2>
 		<div class="bg-gray-300 rounded-lg p-4">
 			<!-- Aquí puedes agregar el contenido de tu dashboard -->
-			<div class="p-4">
-				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
-					<table class="min-w-full">
-						<thead class="bg-gray-200">
-							<tr>
-								<th class="py-2 px-4">Localidad</th>
-								<th class="py-2 px-4">Tipo</th>
-								<th class="py-2 px-4">Nombre</th>
-								<th class="py-2 px-4">Editar</th>
-								<th class="py-2 px-4">Eliminar</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="py-2 px-4">John Doe</td>
-								<td class="py-2 px-4">28</td>
-								<td class="py-2 px-4">john@example.com</td>
-							</tr>
-							<tr>
-								<td class="py-2 px-4">Jane Smith</td>
-								<td class="py-2 px-4">35</td>
-								<td class="py-2 px-4">jane@example.com</td>
-							</tr>
-							<!-- Agrega más filas de datos según sea necesario -->
-						</tbody>
-					</table>
-				</div>
-			</div>
 			<br>
 			<br>
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -73,7 +45,6 @@
 								<th class="py-2 px-4">Ciudad</th>
 								<th class="py-2 px-4">Espacios Disponibles</th>
 								<th class="py-2 px-4">Tipo</th>
-								<th class="py-2 px-4">Desactivar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,7 +72,6 @@
 								<th class="py-2 px-4">Ciudad</th>
 								<th class="py-2 px-4">Espacios Disponibles</th>
 								<th class="py-2 px-4">Tipo</th>
-								<th class="py-2 px-4">Desactivar</th>
 							</tr>
 						</thead>
 						<tbody>

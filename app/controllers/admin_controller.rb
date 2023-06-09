@@ -2,7 +2,7 @@ class AdminController < ApplicationController
   before_action :authenticate_user! # Asegura que el usuario esté autenticado antes de acceder a las acciones
   
   def index
-    @user = User.all
+    @user = User.where(role_id: [1, 2])
   end
 
   def new

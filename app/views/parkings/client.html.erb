@@ -10,14 +10,13 @@
 					<table class="min-w-full">
 						<thead class="bg-gray-200">
               <tr>
-                <th class="py-2 px-4 align-middle ">Nombre</th>
-                <th class="py-2 px-4 align-middle">Apellido</th>
                 <th class="py-2 px-4 align-middle">Email</th>
                 <th class="py-2 px-4 align-middle">Rol</th>
 								<th class="py-2 px-4 align-middle">Esta Activo</th>
                 <th class="py-2 px-4 align-middle">Activar</th>
 								<th class="py-2 px-4 align-middle">Desactivar</th>
                 <th class="py-2 px-4 align-middle">Eliminar</th>
+                <th class="py-2 px-4 align-middle">Reservas</th>
               </tr>
             </thead>
             <tbody>
@@ -25,11 +24,11 @@
                 <tr>
                   <td class="py-2 px-4 text-center align-middle"><%= user.email %></td>
                   <td class="py-2 px-4 text-center align-middle"><%= user.role.present? ? user.role.name : "No" %></td>
-  
 									<td class="py-2 px-4 text-center align-middle"><%= user.status == true ? "Si" : "No" %></td>
                   <td class="py-2 px-4 text-center align-middle"><%= button_to "Activar", enable_admin_index_path(id: user.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
                   <td class="py-2 px-4 text-center align-middle"><%= button_to "Desactivar", disable_admin_index_path(id: user.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
                   <td class="py-2 px-4 text-center align-middle"><%= button_to "Eliminar", admin_path(user.id), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este tipo de estacionamiento?' }, class: "inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Reservas", client_parking_parkings_path(id: user.id), method: :get, data: { confirm: '¿Estás seguro de que quieres eliminar este tipo de estacionamiento?' }, class: "inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -62,17 +61,5 @@
 					</div>
 				</div>
 			</div>
-		<section id="servicios" class="container mx-auto py-12 h-100">
-			<div class="container mx-auto px-4">
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					<div class="bg-white rounded-lg shadow-xl p-6 flex items-center">
-						<div>
-							<h2 class="text-xl font-semibold">Registrar Administrador</h2>
-							<%= link_to "Registrar", new_admin_path, class: "bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg sm:inline-block sm:w-auto form-input mt-1 py-3 px-4 block w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-50" %>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
 	</div>
 </div>

@@ -24,6 +24,11 @@ Rails.application.routes.draw do
       patch :disable
       get :report 
       get :statistics
+      get :client
+      get :client_parking
+      patch :enable_booking
+      patch :disable_booking
+      delete :destroy_booking
     end
   end
 

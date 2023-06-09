@@ -1,0 +1,43 @@
+<div class="min-h-screen flex flex-col sm:flex-row">
+	<!-- Sidebar -->
+	<%= render partial: 'welcome_page/admin_bar' %> 
+	<div class="w-full sm:w-3/4 p-8">
+		<h2 class="text-2xl font-bold mb-4">Bienvenido al Panel de Administración</h2>
+		<div class="bg-gray-400 rounded-lg p-4">
+			<!-- Aquí puedes agregar el contenido de tu dashboard -->
+			<div class="p-4">
+				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+					<table class="min-w-full">
+						<thead class="bg-gray-200">
+              <tr>
+                <th class="py-2 px-4 align-middle">Email</th>
+                <th class="py-2 px-4 align-middle">Rol</th>
+								<th class="py-2 px-4 align-middle">Esta Activo</th>
+                <th class="py-2 px-4 align-middle">Activar</th>
+								<th class="py-2 px-4 align-middle">Desactivar</th>
+                <th class="py-2 px-4 align-middle">Eliminar</th>
+                <th class="py-2 px-4 align-middle">Reservas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @booking.sort.each do |booking| %>	
+                <tr>
+                  <td class="py-2 px-4 text-center align-middle"><%= booking.parking.name %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= booking.status == true ? "Activo" : "Inactivo" %></td>
+									<td class="py-2 px-4 text-center align-middle"><%= booking.start_hour %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= booking.finish_hour %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= booking.date %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Marcar Entada", enable_booking_parkings_path(id: user.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Marcar Salida", disable_booking_parkings_path(id: user.id), method: :patch, class: "inline-block bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                  <td class="py-2 px-4 text-center align-middle"><%= button_to "Eliminar", destroy_booking_parkings_path(user.id), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este tipo de estacionamiento?' }, class: "inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+</div>
