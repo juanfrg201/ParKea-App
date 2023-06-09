@@ -22,7 +22,7 @@ class ParkingsController < ApplicationController
   end
 
   def client_parking
-    @booking = Booking.where(user_id: current_user.id)
+    @booking = Booking.where(user_id: params[:id].to_i)
   end
 
   def destroy_booking
